@@ -1,5 +1,7 @@
 let clockDisplay = document.querySelector(".clock__display").innerHTML;
+let progressBar = document.querySelector(".clock__time-marker");
 let toggleButton = document.querySelector("#start");
+let resetButton = document.querySelector("#reset");
 
 let workSessionDuration = 25 * 60;
 let currentTimeLeftInSession = 25 * 60;
@@ -26,8 +28,7 @@ const toggleClock = () => {
 
 const decreaseTime = () => {
   currentTimeLeftInSession--;
-  getPercentageOfTimeElapsed();
-  console.log(currentTimeLeftInSession);
+  updateProgressBar();
 }
 
 const toggleButtonName = () => {
@@ -37,5 +38,11 @@ const toggleButtonName = () => {
 const getPercentageOfTimeElapsed = () => {
   let elapsedTime = workSessionDuration - currentTimeLeftInSession;
   let percentage = (elapsedTime * 100) / workSessionDuration;
-  console.log(percentage);
+  
+  return percentage.toFixed(2);
+}
+
+const updateProgressBar = () => {
+  let percentage = getPercentageOfTimeElapsed();
+  progressBar.style.width = `${percentage}%`;
 }
