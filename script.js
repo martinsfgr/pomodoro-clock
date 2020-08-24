@@ -16,6 +16,7 @@ const toggleClock = () => {
   if (!isClockRunning) {
     isClockRunning = true;
     clockTimer = setInterval(decreaseTime, 1000);
+    checkEndOfSession(clockTimer);
     toggleButtonName();
   } 
   
@@ -28,7 +29,18 @@ const toggleClock = () => {
 
 const decreaseTime = () => {
   currentTimeLeftInSession--;
+  checkEndOfSession();
   updateProgressBar();
+}
+
+const checkEndOfSession = () => {
+  if (currentTimeLeftInSession === 0) {
+    isClockRunning = false;
+    clearInterval(clockTimer);
+    toggleButtonName();
+    currentTimeLeftInSession = workSessionDuration;
+    alert('Take a break and start again =)');
+  }
 }
 
 const toggleButtonName = () => {
