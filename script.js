@@ -9,23 +9,25 @@ toggleButton.addEventListener("click", event => {
   toggleClock();
 });
 
-const decreaseTime = () => {
-  workingTime--;
-  console.log(workingTime);
-}
-
 const toggleClock = () => {
   if (!isClockRunning) {
     isClockRunning = true;
     clockTimer = setInterval(decreaseTime, 1000);
-
-    toggleButton.innerHTML = "STOP";
+    toggleButtonName();
   } 
   
   else if (isClockRunning) {
     isClockRunning = false;
     clearInterval(clockTimer);
-
-    toggleButton.innerHTML = "START";
+    toggleButtonName();
   }
+}
+
+const decreaseTime = () => {
+  workingTime--;
+  console.log(workingTime);
+}
+
+const toggleButtonName = () => {
+  isClockRunning ? toggleButton.innerHTML = "STOP" : toggleButton.innerHTML = "START";
 }
