@@ -1,22 +1,31 @@
 let clockDisplay = document.querySelector(".clock__display").innerHTML;
 let toggleButton = document.querySelector("#start");
+
 let workingTime = 25 * 60;
+let isClockRunning = false;
 
 toggleButton.addEventListener("click", event => {
   event.preventDefault();
-  toggleClock(toggleButton);
+  toggleClock();
 });
 
-const toggleClock = (button) => {
-  if (button.innerHTML === "START") {
-    clockTimer = setInterval(() => {
-      workingTime--;
-      console.log(workingTime);
-    }, 1000);
+const decreaseTime = () => {
+  workingTime--;
+  console.log(workingTime);
+}
 
-    button.innerHTML = "STOP";
-  } else if (button.innerHTML === "STOP") {
+const toggleClock = () => {
+  if (!isClockRunning) {
+    isClockRunning = true;
+    clockTimer = setInterval(decreaseTime, 1000);
+
+    toggleButton.innerHTML = "STOP";
+  } 
+  
+  else if (isClockRunning) {
+    isClockRunning = false;
     clearInterval(clockTimer);
-    button.innerHTML = "START";
+
+    toggleButton.innerHTML = "START";
   }
 }
