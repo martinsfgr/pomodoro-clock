@@ -15,7 +15,9 @@ body {
 }
 
 .clock__progress-bar {
+  align-items: center;
   background-color: #d8524d;
+  display: flex;
   height: 1px;
   margin-bottom: 5px;
   position: fixed;
@@ -25,7 +27,7 @@ body {
 
 .clock__time-marker {
   background-color: white;
-  height: 100%;
+  height: 4px;
   width: 0;
 }
 
