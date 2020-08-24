@@ -1,34 +1,22 @@
 let clockDisplay = document.querySelector(".clock__display").innerHTML;
 let toggleButton = document.querySelector("#start");
-
 let workingTime = 25 * 60;
 
 toggleButton.addEventListener("click", event => {
   event.preventDefault();
-
-  togglePomodoroTimer(toggleButton);
-  console.log("Botão funcionando");
+  toggleClock(toggleButton);
 });
 
-const togglePomodoroTimer = (button) => {
+const toggleClock = (button) => {
   if (button.innerHTML === "START") {
-    startTimer(true);
+    clockTimer = setInterval(() => {
+      workingTime--;
+      console.log(workingTime);
+    }, 1000);
+
     button.innerHTML = "STOP";
-  } else {
-    startTimer(false);
+  } else if (button.innerHTML === "STOP") {
+    clearInterval(clockTimer);
     button.innerHTML = "START";
   }
-}
-
-const startTimer = (inProgress) => {
-  let refreshInterval = setInterval(pomodoroInProgress, 1000);
-
-  if (!inProgress) {
-    console.log('a');
-  }
-}
-
-const pomodoroInProgress = () => {
-  workingTime--;
-  console.log(workingTime);
 }
