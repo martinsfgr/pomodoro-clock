@@ -1,7 +1,8 @@
 let clockDisplay = document.querySelector(".clock__display").innerHTML;
 let toggleButton = document.querySelector("#start");
 
-let workingTime = 25 * 60;
+let workSessionDuration = 25 * 60;
+let currentTimeLeftInSession = 25 * 60;
 let isClockRunning = false;
 
 toggleButton.addEventListener("click", event => {
@@ -24,10 +25,17 @@ const toggleClock = () => {
 }
 
 const decreaseTime = () => {
-  workingTime--;
-  console.log(workingTime);
+  currentTimeLeftInSession--;
+  getPercentageOfTimeElapsed();
+  console.log(currentTimeLeftInSession);
 }
 
 const toggleButtonName = () => {
   isClockRunning ? toggleButton.innerHTML = "STOP" : toggleButton.innerHTML = "START";
+}
+
+const getPercentageOfTimeElapsed = () => {
+  let elapsedTime = workSessionDuration - currentTimeLeftInSession;
+  let percentage = (elapsedTime * 100) / workSessionDuration;
+  console.log(percentage);
 }
