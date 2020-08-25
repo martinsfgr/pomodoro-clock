@@ -12,6 +12,11 @@ toggleButton.addEventListener("click", event => {
   toggleClock();
 });
 
+resetButton.addEventListener("click", event => {
+  event.preventDefault();
+  resetClock();
+})
+
 const toggleClock = () => {
   if (!isClockRunning) {
     isClockRunning = true;
@@ -25,6 +30,15 @@ const toggleClock = () => {
     clearInterval(clockTimer);
     toggleButtonName();
   }
+}
+
+const resetClock = () => {
+  isClockRunning = false;
+  clearInterval(clockTimer);
+  currentTimeLeftInSession = workSessionDuration;
+  updateProgressBar();
+  updateClockDisplay(workSessionDuration);
+  toggleButtonName();
 }
 
 const decreaseTime = () => {
